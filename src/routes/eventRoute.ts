@@ -9,5 +9,6 @@ router.post('/events', validateRequest(EventValidation.eventValidationSchema), E
 router.get('/events', EventController.GetEvents)
 router.put('/events/:id', EventController.UpdateEvent)
 router.delete('/events/:id', EventController.DeleteEvent)
+router.get('/events/:id', EventController.GetSingleEvents)
 
 export const EventRoutes = router;

@@ -57,6 +57,28 @@ const GetEvents = async (req: Request, res: Response) => {
     });
   }
 };
+const GetSingleEvents = async (req: Request, res: Response) => {
+  try {
+    const id = parseInt(req.params.id);
+    let event = events.filter((e) => e.id == id);
+    if (!event[0]) {
+      return res.status(404).json({
+        message: 'Event not found!',
+      });
+    }
+
+
+    return res.status(201).json({
+      success: true,
+      message: 'Events Details Retrive Successfully',
+      data: event[0],
+    });
+  } catch (error: any) {
+    return res.status(500).json({
+      message: error?.message,
+    });
+  }
+};
 const UpdateEvent = async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);
@@ -69,8 +91,10 @@ const UpdateEvent = async (req: Request, res: Response) => {
     }
 
     // console.log(event)
+    if(event[0].archived) event[0].archived = false;
+    else event[0].archived = true;
 
-    event[0].archived = true;
+    // event[0].archived = true;
 
     return res.status(201).json({
       success: true,
@@ -111,4 +135,5 @@ export const EventController = {
   GetEvents,
   UpdateEvent,
   DeleteEvent,
+  GetSingleEvents
 };
