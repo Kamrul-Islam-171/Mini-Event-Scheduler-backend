@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { TerrorSourse, TGenericErrorResponse} from "../interface/error";
 

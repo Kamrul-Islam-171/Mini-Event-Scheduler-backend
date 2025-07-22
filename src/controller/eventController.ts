@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from 'express';
 import { TEvent } from '../models/eventModel';
 import { Categorize } from '../utils/categorize';
@@ -37,19 +38,25 @@ const AddEvents = async (req: Request, res: Response) => {
 };
 const GetEvents = async (req: Request, res: Response) => {
   try {
-    const sortedEvents = [...events].sort((a, b) => {
+    const {category} = req.query;
+    const  sortedEvents = [...events].sort((a, b) => {
       const dateA = new Date(`${a.date}T${a.time}`);
       const dateB = new Date(`${b.date}T${b.time}`);
       // console.log(dateA, dateB);
       return dateA.getTime() - dateB.getTime();
     });
 
+    let filterData = [...sortedEvents];
+    if(category) {
+      filterData = filterData.filter((u) => u.category == category); 
+    }
+
     // console.log(sortedEvents)
 
     return res.status(201).json({
       success: true,
       message: 'Events retrive Successfully',
-      data: sortedEvents,
+      data: filterData,
     });
   } catch (error: any) {
     return res.status(500).json({
@@ -60,7 +67,7 @@ const GetEvents = async (req: Request, res: Response) => {
 const GetSingleEvents = async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);
-    let event = events.filter((e) => e.id == id);
+    const event = events.filter((e) => e.id == id);
     if (!event[0]) {
       return res.status(404).json({
         message: 'Event not found!',
@@ -83,7 +90,7 @@ const UpdateEvent = async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);
     // console.log("id = ", id)
-    let event = events.filter((e) => e.id == id);
+    const event = events.filter((e) => e.id == id);
     if (!event[0]) {
       return res.status(404).json({
         message: 'Event not found!',
