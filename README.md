@@ -8,7 +8,7 @@
 </div>
 
 <div align="center">
-  <h3>🔗 <a href="https://github.com/Kamrul-Islam-171/Mini-Event-Scheduler-backend">Repository</a> | 🚀 <a href="https://mini-event-scheduler-alpha.vercel.app">Live API</a></h3>
+  <h3>🔗 <a href="https://github.com/Kamrul-Islam-171/Mini-Event-Scheduler-client">Front-End Repository</a> | 🔗 <a href="https://github.com/Kamrul-Islam-171/Mini-Event-Scheduler-backend">Backend Repository</a></h3> | 🚀 <a href="https://mini-event-scheduler-alpha.vercel.app">Live Demo</a> | 🚀 <a href="https://mini-event-scheduler-backend.vercel.app">Backend Live</a></h3>
 </div>
 
 
